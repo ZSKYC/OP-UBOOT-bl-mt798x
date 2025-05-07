@@ -10,7 +10,6 @@
 	model = "mt7986-netcore_n60-pro-512m";
 	compatible = "mediatek,mt7986", "mediatek,mt7986-rfb";
 
-
 	chosen {
 		stdout-path = &uart0;
 		tick-timer = &timer0;
@@ -20,11 +19,6 @@
 		bootcmd = "mtkboardboot";
 		blink_led = "blue:power";
 		system_led = "blue:power";
-	};
-
-	memory@40000000 {
-		device_type = "memory";
-		reg = <0x40000000 0x20000000>;
 	};
 
 //	mtd-layout {
@@ -42,24 +36,20 @@
 //		};
 //	};
 
-
-
 	gpio-keys {
 		compatible = "gpio-keys";
 
 		button-reset {
 			label = "reset";
-			linux,code = <KEY_RESTART>;
 			gpios = <&gpio 9 GPIO_ACTIVE_LOW>;
 		};
 
 		button-mesh {
 			label = "mesh";
-			linux,code = <KEY_WPS_BUTTON>;
 			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
 		};
 	};
-
+	
 	gpio-leds {
 		compatible = "gpio-leds";
 
@@ -88,21 +78,18 @@
 			gpios = <&gpio 32 GPIO_ACTIVE_LOW>;
 		};
 	};
-
-	bl2_verify {
-		bl2_compatible = "spim-nand";
-	};
+	
 };
 
 &eth {
 	status = "okay";
 	mediatek,gmac-id = <0>;
-	phy-mode = "2500base-x";
+	phy-mode = "sgmii";
 	mediatek,switch = "mt7531";
 	reset-gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
 
 	fixed-link {
-		speed = <2500>;
+		speed = <1000>;
 		full-duplex;
 	};
 };
@@ -144,7 +131,7 @@
 
 	spi_nand@0 {
 		compatible = "spi-nand";
-		reg = <1>;
+		reg = <0>;
 		spi-max-frequency = <52000000>;
 	};
 };
