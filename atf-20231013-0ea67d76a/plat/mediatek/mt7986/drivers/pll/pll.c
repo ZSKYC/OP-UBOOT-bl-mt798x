@@ -85,7 +85,8 @@ void mtk_pll_init(int skip_dcm_setting)
 	}
 	else {
 		if ((mmio_read_32(BS_PAD_SYS_WATCHDOG) & BS_CPU_VCORE))
-			mmio_write_32(ARMPLL_CON1, 0x64000000); /* 1.023: 2G */
+			/*  mmio_write_32(ARMPLL_CON1, 0x64000000); /* 1.023: 2G */
+			mmio_write_32(ARMPLL_CON1, 0x7D000000); /* 1.25: 2.5G */
 		else
 			mmio_write_32(ARMPLL_CON1, 0x50000000); /* 0.85: 1.6G */
 	}
